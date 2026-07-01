@@ -1,414 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nine Realms Codex – Fans</title>
-
-<style>
-    body {
-        margin: 0;
-        font-family: system-ui, sans-serif;
-        background: radial-gradient(circle at top, #1b1f3b 0, #05060a 45%, #000000 100%);
-        color: #f5f5f5;
-    }
-    header {
-        text-align: center;
-        padding: 2rem 1rem;
-        background: linear-gradient(135deg, #1b1f3b, #3b1b3b);
-        border-bottom: 1px solid #333;
-    }
-    header h1 {
-        margin: 0;
-        font-size: 2.2rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-    }
-    header p {
-        margin-top: 0.5rem;
-        font-size: 1rem;
-        color: #c0b3ff;
-    }
-    nav {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        justify-content: center;
-        padding: 1rem;
-        background: #0b0d14;
-        border-bottom: 1px solid #222;
-    }
-    .nav-btn {
-        padding: 0.6rem 1rem;
-        border-radius: 999px;
-        border: 1px solid #444;
-        background: #141726;
-        color: #f5f5f5;
-        text-decoration: none;
-        font-size: 0.9rem;
-        cursor: pointer;
-        transition: background 0.2s, border-color 0.2s, transform 0.1s;
-    }
-    .nav-btn:hover {
-        background: #262b4a;
-        border-color: #7b5cff;
-        transform: translateY(-1px);
-    }
-    main {
-        max-width: 900px;
-        margin: 1.5rem auto;
-        padding: 1.5rem;
-        background: #0b0d14;
-        border-radius: 12px;
-        border: 1px solid #222;
-    }
-    h2 {
-        margin-top: 0;
-        font-size: 1.4rem;
-        color: #c0b3ff;
-    }
-    .section {
-        display: none;
-        animation: fadeIn 0.4s ease;
-    }
-    .section.active {
-        display: block;
-    }
-    @keyframes fadeIn {
-        from {opacity: 0; transform: translateY(10px);}
-        to {opacity: 1; transform: translateY(0);}
-    }
-    .item {
-        position: relative;
-        padding: 1rem;
-        border: 1px solid #222;
-        border-radius: 10px;
-        margin-bottom: 1rem;
-        background: #141726;
-        overflow: hidden;
-    }
-    .item::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: 10px;
-        border: 1px solid rgba(123, 92, 255, 0.25);
-        box-shadow: 0 0 18px rgba(123, 92, 255, 0.25);
-        opacity: 0;
-        transition: opacity 0.3s;
-        pointer-events: none;
-    }
-    .item:hover::before {
-        opacity: 1;
-    }
-    .item-title {
-        font-size: 1.1rem;
-        font-weight: 600;
-        margin-bottom: 0.4rem;
-    }
-    img {
-        width: 100%;
-        border-radius: 10px;
-        margin-top: 0.5rem;
-    }
-    .review-box {
-        margin-top: 1.5rem;
-        padding: 1rem;
-        background: #141726;
-        border-radius: 10px;
-        border: 1px solid #333;
-    }
-    textarea {
-        width: 100%;
-        padding: 0.6rem;
-        background: #05060a;
-        color: #f5f5f5;
-        border: 1px solid #333;
-        border-radius: 8px;
-        resize: vertical;
-    }
-    button {
-        margin-top: 0.6rem;
-        padding: 0.6rem 1rem;
-        border-radius: 999px;
-        border: 1px solid #555;
-        background: #1f2440;
-        color: #f5f5f5;
-        cursor: pointer;
-        transition: background 0.2s, border-color 0.2s;
-    }
-    button:hover {
-        background: #343b6b;
-        border-color: #7b5cff;
-    }
-    .amazon-btn {
-        display: block;
-        text-align: center;
-        margin: 1.5rem auto;
-        padding: 0.8rem 1.2rem;
-        background: #ff9900;
-        color: #000;
-        font-weight: bold;
-        border-radius: 999px;
-        text-decoration: none;
-        width: 220px;
-        animation: glowPulse 3s infinite;
-    }
-    @keyframes glowPulse {
-        0% { box-shadow: 0 0 10px rgba(255,153,0,0.4); }
-        50% { box-shadow: 0 0 22px rgba(255,153,0,0.8); }
-        100% { box-shadow: 0 0 10px rgba(255,153,0,0.4); }
-    }
-    footer {
-        text-align: center;
-        padding: 1rem;
-        font-size: 0.8rem;
-        color: #888;
-        border-top: 1px solid #222;
-        background: #05060a;
-    }
-    #audio-toggle {
-        position: fixed;
-        bottom: 1rem;
-        right: 1rem;
-        z-index: 999;
-        font-size: 0.8rem;
-    }
-</style>
+  <meta charset="UTF-8">
+  <title>NINE REALMS CODEX</title>
+  <link rel="stylesheet" href="styles/codex.css">
 </head>
-
-<body>
-
-<header>
-    <h1>Nine Realms Codex</h1>
+<body class="codex-body">
+  <header class="codex-header">
+    <h1>NINE REALMS CODEX</h1>
     <p>Explore the Realms • Discover the Lore • Meet the Characters</p>
-</header>
+    <nav class="codex-nav">
+      <button data-section="realms">Realms</button>
+      <button data-section="characters">Characters</button>
+      <button data-section="maps">Maps</button>
+      <button data-section="lore">Lore</button>
+      <button data-section="teasers">Teasers</button>
+      <button data-section="books">Books</button>
+      <button data-section="reviews">Reviews</button>
+      <button data-section="fans">Fan Club</button>
+    </nav>
+  </header>
 
-<nav>
-    <button class="nav-btn" data-tab="realms">Realms</button>
-    <button class="nav-btn" data-tab="characters">Characters</button>
-    <button class="nav-btn" data-tab="maps">Maps</button>
-    <button class="nav-btn" data-tab="lore">Lore</button>
-    <button class="nav-btn" data-tab="teasers">Teasers</button>
-    <button class="nav-btn" data-tab="books">Books</button>
-    <button class="nav-btn" data-tab="reviews">Reviews</button>
-    <button class="nav-btn" data-tab="fanclub">Fan Club</button>
-</nav>
-
-<main>
-
-    <!-- REALMS -->
-    <section id="realms" class="section active">
-        <h2>Realms</h2>
-        <div id="realm-list"></div>
+  <main id="codex-main">
+    <section id="section-realms" class="codex-section active">
+      <h2>Realms</h2>
+      <div id="realms-list" class="card-grid">
+        <p class="empty-msg">No entries yet.</p>
+      </div>
     </section>
 
-    <!-- CHARACTERS -->
-    <section id="characters" class="section">
-        <h2>Characters</h2>
-        <div id="char-list"></div>
+    <section id="section-characters" class="codex-section">
+      <h2>Characters</h2>
+      <div id="characters-list" class="card-grid">
+        <p class="empty-msg">No entries yet.</p>
+      </div>
     </section>
 
-    <!-- MAPS -->
-    <section id="maps" class="section">
-        <h2>Maps</h2>
-        <div id="map-list"></div>
+    <section id="section-maps" class="codex-section">
+      <h2>Maps</h2>
+      <div id="maps-list" class="card-grid">
+        <p class="empty-msg">No entries yet.</p>
+      </div>
     </section>
 
-    <!-- LORE -->
-    <section id="lore" class="section">
-        <h2>Lore</h2>
-        <div id="lore-list"></div>
+    <section id="section-lore" class="codex-section">
+      <h2>Lore</h2>
+      <div id="lore-list" class="card-grid">
+        <p class="empty-msg">No entries yet.</p>
+      </div>
     </section>
 
-    <!-- TEASERS -->
-    <section id="teasers" class="section">
-        <h2>Teasers</h2>
-        <div id="teaser-list"></div>
+    <section id="section-teasers" class="codex-section">
+      <h2>Teasers</h2>
+      <div id="teasers-list" class="card-grid">
+        <p class="empty-msg">No entries yet.</p>
+      </div>
+    </section>
 
-        <!-- Trailer embed -->
-        <div class="item">
-            <div class="item-title">Official Trailer</div>
-            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;">
-                <iframe 
-                    src="https://www.youtube.com/embed/VIDEO_ID" 
-                    title="Nine Realms Trailer"
-                    style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:10px;"
-                    allowfullscreen>
-                </iframe>
-            </div>
+    <section id="section-books" class="codex-section">
+      <h2>Books</h2>
+      <div id="books-list" class="card-grid">
+        <p class="empty-msg">No entries yet.</p>
+      </div>
+    </section>
+
+    <section id="section-reviews" class="codex-section">
+      <h2>Reviews</h2>
+      <div id="reviews-list" class="card-grid">
+        <p class="empty-msg">No entries yet.</p>
+      </div>
+    </section>
+
+    <section id="section-fans" class="codex-section">
+      <h2>Fan Club</h2>
+      <div id="fans-list" class="card-grid">
+        <p class="empty-msg">No entries yet.</p>
+      </div>
+    </section>
+
+    <div id="realm-detail" class="realm-detail hidden">
+      <button id="realm-back" class="back-btn">← Back to Realms</button>
+      <div class="realm-detail-inner">
+        <div class="realm-detail-overlay">
+          <h2 id="realm-detail-name"></h2>
+          <p id="realm-detail-description"></p>
         </div>
-    </section>
+      </div>
+    </div>
+  </main>
 
-    <!-- BOOKS -->
-    <section id="books" class="section">
-        <h2>Books</h2>
-        <div id="book-list"></div>
+  <footer class="codex-footer">
+    <span>Nine Realms Codex © Fans Portal</span>
+    <button id="ambient-toggle">Ambient On/Off</button>
+  </footer>
 
-        <a class="amazon-btn" href="https://www.amazon.com/dp/B0H5CFFZNC" target="_blank">
-            Buy on Amazon
-        </a>
-    </section>
-
-    <!-- REVIEWS -->
-    <section id="reviews" class="section">
-        <h2>Fan Reviews</h2>
-
-        <div id="review-list"></div>
-
-        <div class="review-box">
-            <h3>Leave a Review</h3>
-            <textarea id="review-text" placeholder="Write your review..."></textarea>
-            <button id="submit-review">Submit Review</button>
-        </div>
-    </section>
-
-    <!-- FAN CLUB -->
-    <section id="fanclub" class="section">
-        <h2>Join the Nine Realms Fan Club</h2>
-
-        <div class="item">
-            <div class="item-title">Become a Realmwalker</div>
-            <div>
-                Get early teasers, secret lore, and special announcements from the Nine Realms.
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="item-title">Stay Connected</div>
-            <div>
-                Follow the Amazon page for updates, new releases, and special promotions.
-            </div>
-        </div>
-    </section>
-
-</main>
-
-<footer>
-    Nine Realms Codex © Fans Portal
-</footer>
-
-<audio id="ambient-audio" src="YOUR_AUDIO_URL.mp3" loop></audio>
-<button id="audio-toggle">🔊 Ambient On/Off</button>
-
-<script>
-    // Navigation tabs
-    const navButtons = document.querySelectorAll(".nav-btn");
-    const sections = document.querySelectorAll(".section");
-
-    navButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            const target = btn.dataset.tab;
-            sections.forEach(sec => {
-                sec.classList.toggle("active", sec.id === target);
-            });
-        });
-    });
-
-    // Ambient audio
-    const ambient = document.getElementById("ambient-audio");
-    const audioToggle = document.getElementById("audio-toggle");
-
-    audioToggle.addEventListener("click", () => {
-        if (ambient.paused) {
-            ambient.play();
-            audioToggle.textContent = "🔊 Ambient On";
-        } else {
-            ambient.pause();
-            audioToggle.textContent = "🔇 Ambient Off";
-        }
-    });
-
-    // Load admin data from localStorage
-    const realms = JSON.parse(localStorage.getItem("realms") || "[]");
-    const characters = JSON.parse(localStorage.getItem("characters") || "[]");
-    const maps = JSON.parse(localStorage.getItem("maps") || "[]");
-    const lores = JSON.parse(localStorage.getItem("lores") || "[]");
-    const teasers = JSON.parse(localStorage.getItem("teasers") || "[]");
-    const books = JSON.parse(localStorage.getItem("books") || "[]");
-
-    // Render helper
-    function render(container, items, formatter) {
-        container.innerHTML = "";
-        if (!items.length) {
-            container.innerHTML = "<p>No entries yet.</p>";
-            return;
-        }
-        items.forEach(item => {
-            const div = document.createElement("div");
-            div.className = "item";
-            div.innerHTML = formatter(item);
-            container.appendChild(div);
-        });
-    }
-
-    // Render all sections
-    render(document.getElementById("realm-list"), realms, r => `
-        <div class="item-title">${r.name}</div>
-        <div>${r.desc || ""}</div>
-        ${r.icon ? `<img src="${r.icon}">` : ""}
-    `);
-
-    render(document.getElementById("char-list"), characters, c => `
-        <div class="item-title">${c.name} ${c.role ? "– " + c.role : ""}</div>
-        ${c.realm ? `<div>Realm: ${c.realm}</div>` : ""}
-        ${c.backstory ? `<div>${c.backstory}</div>` : ""}
-        ${c.img ? `<img src="${c.img}">` : ""}
-    `);
-
-    render(document.getElementById("map-list"), maps, m => `
-        <div class="item-title">${m.name} ${m.type ? "(" + m.type + ")" : ""}</div>
-        ${m.realm ? `<div>Realm: ${m.realm}</div>` : ""}
-        ${m.url ? `<img src="${m.url}">` : ""}
-    `);
-
-    render(document.getElementById("lore-list"), lores, l => `
-        <div class="item-title">${l.title}</div>
-        ${l.realm ? `<div>Realm: ${l.realm}</div>` : ""}
-        ${l.book ? `<div>Book: ${l.book}</div>` : ""}
-        ${l.content ? `<div>${l.content}</div>` : ""}
-    `);
-
-    render(document.getElementById("teaser-list"), teasers, t => `
-        <div class="item-title">${t.title}</div>
-        ${t.target ? `<div>Target: ${t.target}</div>` : ""}
-        ${t.text ? `<div>${t.text}</div>` : ""}
-        ${t.img ? `<img src="${t.img}">` : ""}
-    `);
-
-    render(document.getElementById("book-list"), books, b => `
-        <div class="item-title">${b.fullTitle}</div>
-        ${b.number ? `<div>Book number: ${b.number}</div>` : ""}
-        ${b.desc ? `<div>${b.desc}</div>` : ""}
-    `);
-
-    // Reviews
-    const reviewList = document.getElementById("review-list");
-    const reviewText = document.getElementById("review-text");
-    const submitReview = document.getElementById("submit-review");
-
-    const reviews = JSON.parse(localStorage.getItem("reviews") || "[]");
-
-    function renderReviews() {
-        render(reviewList, reviews, r => `
-            <div class="item-title">Fan Review</div>
-            <div>${r}</div>
-        `);
-    }
-
-    renderReviews();
-
-    submitReview.addEventListener("click", () => {
-        const text = reviewText.value.trim();
-        if (!text) return;
-
-        reviews.push(text);
-        localStorage.setItem("reviews", JSON.stringify(reviews));
-
-        reviewText.value = "";
-        renderReviews();
-    });
-</script>
-
+  <script src="scripts/fan.js"></script>
 </body>
 </html>
