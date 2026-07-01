@@ -1,5 +1,10 @@
 {
-    "realms": [],
+    "realms": [{
+    "realmName": "Vearth",
+    "realmDesc": "the Human realm of kingdoms, ambition, and courage.\nIn the realm of Vearth, there were four great kingdoms.\nThe first was the Kingdom of Althoris Vale, the heartland of green fields, rivers, and peaceful villages, where life thrived in harmony with nature.\nThe second was the Kingdom of Kharondis, where strength, military power, and ambition ruled supreme. It was a land of warriors, where soldiers trained relentlessly to become generals of war.\nThe third was the Kingdom of Solmire, the capital of scholars, knowledge, and law. Here, decisions that shaped Vearth were debated and recorded, guided by wisdom and tradition.\nThe fourth was the Kingdom of Nythera, a land of mystery, forbidden knowledge, and ancient temples hidden deep within shadowed lands.\n",
+    "realmIcon": "https://res.cloudinary.com/dqsvwwku4/image/upload/v1782875092/book1/br4uwyg4ntpyx46fddug.jpg",
+    "realmBg": "https://res.cloudinary.com/dqsvwwku4/image/upload/v1782875092/book1/br4uwyg4ntpyx46fddug.jpg"
+}],
     "characters": [],
     "maps": [],
     "lore": [],
