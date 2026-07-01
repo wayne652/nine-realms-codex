@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Codex – Nine Realms</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #05060a;
+            color: #f5f5f5;
+        }
+        header {
+            padding: 1.5rem;
+            text-align: center;
+            background: linear-gradient(135deg, #1b1f3b, #3b1b3b);
+            border-bottom: 1px solid #333;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        header p {
+            margin-top: 0.4rem;
+            font-size: 0.9rem;
+            color: #c0b3ff;
+        }
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            padding: 0.75rem;
+            background: #0b0d14;
+            border-bottom: 1px solid #222;
+        }
+        .tab-btn {
+            padding: 0.5rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid #444;
+            background: #141726;
+            color: #f5f5f5;
+            text-decoration: none;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s, transform 0.1s;
+        }
+        .tab-btn.active {
+            background: #262b4a;
+            border-color: #7b5cff;
+        }
+        .tab-btn:hover {
+            background: #262b4a;
+            border-color: #7b5cff;
+            transform: translateY(-1px);
+        }
+        main {
+            max-width: 900px;
+            margin: 1.5rem auto;
+            padding: 1.5rem;
+            background: #0b0d14;
+            border-radius: 12px;
+            border: 1px solid #222;
+        }
+        section {
+            display: none;
+        }
+        section.active {
+            display: block;
+        }
+        h2 {
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+        form {
+            margin-top: 1rem;
+            display: grid;
+            gap: 0.75rem;
+        }
+        label {
+            font-size: 0.85rem;
+            color: #ccc;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 0.45rem 0.6rem;
+            border-radius: 6px;
+            border: 1px solid #333;
+            background: #05060a;
+            color: #f5f5f5;
+            font-size: 0.9rem;
+        }
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+        button {
+            padding: 0.55rem 1rem;
+            border-radius: 999px;
+            border: 1px solid #555;
+            background: #1f2440;
+            color: #f5f5f5;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        button:hover {
+            background: #343b6b;
+            border-color: #7b5cff;
+        }
+        .list {
+            margin-top: 1rem;
+            border-top: 1px solid #222;
+            padding-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #222;
+        }
+        .item-title {
+            font-weight: 600;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.8rem;
+            color: #888;
+            border-top: 1px solid #222;
+            background: #05060a;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Admin Codex</h1>
+    <p>Worldbuilding Control Panel – Nine Realms</p>
+</header>
+
+<div class="tabs">
+    <button class="tab-btn active" data-tab="realms">Realms</button>
+    <button class="tab-btn" data-tab="characters">Characters</button>
+    <button class="tab-btn" data-tab="maps">Maps</button>
+    <button class="tab-btn" data-tab="lore">Lore</button>
+    <button class="tab-btn" data-tab="teasers">Teasers</button>
+    <button class="tab-btn" data-tab="books">Books</button>
+</div>
+
+<main>
+    <!-- REALMS -->
+    <section id="realms" class="active">
+        <h2>Manage Realms</h2>
+        <form id="realm-form">
+            <label>Realm name</label>
+            <input type="text" id="realm-name" required>
+
+            <label>Realm description</label>
+            <textarea id="realm-desc"></textarea>
+
+            <label>Realm icon URL (Cloudinary)</label>
+            <input type="url" id="realm-icon">
+
+            <button type="submit">Add Realm</button>
+        </form>
+        <div class="list" id="realm-list"></div>
+    </section>
+
+    <!-- CHARACTERS -->
+    <section id="characters">
+        <h2>Manage Characters</h2>
+        <form id="char-form">
+            <label>Character name</label>
+            <input type="text" id="char-name" required>
+
+            <label>Realm</label>
+            <input type="text" id="char-realm">
+
+            <label>Role / title</label>
+            <input type="text" id="char-role">
+
+            <label>Portrait URL (Cloudinary)</label>
+            <input type="url" id="char-img">
+
+            <label>Backstory</label>
+            <textarea id="char-backstory"></textarea>
+
+            <button type="submit">Add Character</button>
+        </form>
+        <div class="list" id="char-list"></div>
+    </section>
+
+    <!-- MAPS -->
+    <section id="maps">
+        <h2>Manage Maps</h2>
+        <form id="map-form">
+            <label>Map name</label>
+            <input type="text" id="map-name" required>
+
+            <label>Realm</label>
+            <input type="text" id="map-realm">
+
+            <label>Map type (realm / region / city / battle)</label>
+            <input type="text" id="map-type">
+
+            <label>Map image URL (Cloudinary)</label>
+            <input type="url" id="map-url">
+
+            <button type="submit">Add Map</button>
+        </form>
+        <div class="list" id="map-list"></div>
+    </section>
+
+    <!-- LORE -->
+    <section id="lore">
+        <h2>Manage Lore</h2>
+        <form id="lore-form">
+            <label>Lore title</label>
+            <input type="text" id="lore-title" required>
+
+            <label>Realm</label>
+            <input type="text" id="lore-realm">
+
+            <label>Book</label>
+            <input type="text" id="lore-book">
+
+            <label>Lore content</label>
+            <textarea id="lore-content"></textarea>
+
+            <button type="submit">Add Lore</button>
+        </form>
+        <div class="list" id="lore-list"></div>
+    </section>
+
+    <!-- TEASERS -->
+    <section id="teasers">
+        <h2>Manage Teasers</h2>
+        <form id="teaser-form">
+            <label>Teaser title</label>
+            <input type="text" id="teaser-title" required>
+
+            <label>Realm / Book</label>
+            <input type="text" id="teaser-target">
+
+            <label>Teaser text</label>
+            <textarea id="teaser-text"></textarea>
+
+            <label>Teaser image / poster URL (Cloudinary)</label>
+            <input type="url" id="teaser-img">
+
+            <button type="submit">Add Teaser</button>
+        </form>
+        <div class="list" id="teaser-list"></div>
+    </section>
+
+    <!-- BOOKS -->
+    <section id="books">
+        <h2>Manage Books</h2>
+        <form id="book-form">
+            <label>Full book title</label>
+            <input type="text" id="book-title" placeholder="Book 1 – The Chosen One" required>
+
+            <label>Short description</label>
+            <textarea id="book-desc"></textarea>
+
+            <button type="submit">Add Book</button>
+        </form>
+        <div class="list" id="book-list"></div>
+    </section>
+</main>
+
+<footer>
+    Admin Codex © Nine Realms
+</footer>
+
+<script>
+    // Tab switching
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const sections = document.querySelectorAll("main section");
+
+    tabButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const target = btn.dataset.tab;
+
+            tabButtons.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            sections.forEach(sec => {
+                sec.classList.toggle("active", sec.id === target);
+            });
+        });
+    });
+
+    // Simple in-memory storage (no backend)
+    const realms = [];
+    const characters = [];
+    const maps = [];
+    const lores = [];
+    const teasers = [];
+    const books = [];
+
+    // Helper to render lists
+    function renderList(container, items, formatter) {
+        container.innerHTML = "";
+        if (!items.length) {
+            container.innerHTML = "<p>No entries yet.</p>";
+            return;
+        }
+        items.forEach(item => {
+            const div = document.createElement("div");
+            div.className = "item";
+            div.innerHTML = formatter(item);
+            container.appendChild(div);
+        });
+    }
+
+    // REALMS
+    document.getElementById("realm-form").addEventListener("submit", e => {
+        e.preventDefault();
+        const name = document.getElementById("realm-name").value.trim();
+        const desc = document.getElementById("realm-desc").value.trim();
+        const icon = document.getElementById("realm-icon").value.trim();
+
+        if (!name) return;
+
+        realms.push({ name, desc, icon });
+        renderList(
+            document.getElementById("realm-list"),
+            realms,
+            r => `
+                <div class="item-title">${r.name}</div>
+                <div>${r.desc || ""}</div>
+                ${r.icon ? `<div>Icon: <a href="${r.icon}" target="_blank">${r.icon}</a></div>` : ""}
+            `
+        );
+
+        e.target.reset();
+    });
+
+    // CHARACTERS
+    document.getElementById("char-form").addEventListener("submit", e => {
+        e.preventDefault();
+        const name = document.getElementById("char-name").value.trim();
+        const realm = document.getElementById("char-realm").value.trim();
+        const role = document.getElementById("char-role").value.trim();
+        const img = document.getElementById("char-img").value.trim();
+        const backstory = document.getElementById("char-backstory").value.trim();
+
+        if (!name) return;
+
+        characters.push({ name, realm, role, img, backstory });
+        renderList(
+            document.getElementById("char-list"),
+            characters,
+            c => `
+                <div class="item-title">${c.name} ${c.role ? "– " + c.role : ""}</div>
+                ${c.realm ? `<div>Realm: ${c.realm}</div>` : ""}
+                ${c.backstory ? `<div>${c.backstory}</div>` : ""}
+                ${c.img ? `<div>Portrait: <a href="${c.img}" target="_blank">${c.img}</a></div>` : ""}
+            `
+        );
+
+        e.target.reset();
+    });
+
+    // MAPS
+    document.getElementById("map-form").addEventListener("submit", e => {
+        e.preventDefault();
+        const name = document.getElementById("map-name").value.trim();
+        const realm = document.getElementById("map-realm").value.trim();
+        const type = document.getElementById("map-type").value.trim();
+        const url = document.getElementById("map-url").value.trim();
+
+        if (!name) return;
+
+        maps.push({ name, realm, type, url });
+        renderList(
+            document.getElementById("map-list"),
+            maps,
+            m => `
+                <div class="item-title">${m.name} ${m.type ? "("+m.type+")" : ""}</div>
+                ${m.realm ? `<div>Realm: ${m.realm}</div>` : ""}
+                ${m.url ? `<div>Map: <a href="${m.url}" target="_blank">${m.url}</a></div>` : ""}
+            `
+        );
+
+        e.target.reset();
+    });
+
+    // LORE
+    document.getElementById("lore-form").addEventListener("submit", e => {
+        e.preventDefault();
+        const title = document.getElementById("lore-title").value.trim();
+        const realm = document.getElementById("lore-realm").value.trim();
+        const book = document.getElementById("lore-book").value.trim();
+        const content = document.getElementById("lore-content").value.trim();
+
+        if (!title) return;
+
+        lores.push({ title, realm, book, content });
+        renderList(
+            document.getElementById("lore-list"),
+            lores,
+            l => `
+                <div class="item-title">${l.title}</div>
+                ${l.realm ? `<div>Realm: ${l.realm}</div>` : ""}
+                ${l.book ? `<div>Book: ${l.book}</div>` : ""}
+                ${l.content ? `<div>${l.content}</div>` : ""}
+            `
+        );
+
+        e.target.reset();
+    });
+
+    // TEASERS
+    document.getElementById("teaser-form").addEventListener("submit", e => {
+        e.preventDefault();
+        const title = document.getElementById("teaser-title").value.trim();
+        const target = document.getElementById("teaser-target").value.trim();
+        const text = document.getElementById("teaser-text").value.trim();
+        const img = document.getElementById("teaser-img").value.trim();
+
+        if (!title) return;
+
+        teasers.push({ title, target, text, img });
+        renderList(
+            document.getElementById("teaser-list"),
+            teasers,
+            t => `
+                <div class="item-title">${t.title}</div>
+                ${t.target ? `<div>Target: ${t.target}</div>` : ""}
+                ${t.text ? `<div>${t.text}</div>` : ""}
+                ${t.img ? `<div>Image: <a href="${t.img}" target="_blank">${t.img}</a></div>` : ""}
+            `
+        );
+
+        e.target.reset();
+    });
+
+    // BOOKS
+    document.getElementById("book-form").addEventListener("submit", e => {
+        e.preventDefault();
+        const fullTitle = document.getElementById("book-title").value.trim();
+        const desc = document.getElementById("book-desc").value.trim();
+
+        if (!fullTitle) return;
+
+        // Try to extract book number from "Book X – Title"
+        let number = null;
+        const match = fullTitle.match(/Book\s+(\d+)/i);
+        if (match) number = match[1];
+
+        books.push({ fullTitle, number, desc });
+        renderList(
+            document.getElementById("book-list"),
+            books,
+            b => `
+                <div class="item-title">${b.fullTitle}</div>
+                ${b.number ? `<div>Book number: ${b.number}</div>` : ""}
+                ${b.desc ? `<div>${b.desc}</div>` : ""}
+            `
+        );
+
+        e.target.reset();
+    });
+</script>
+
+</body>
+</html>

@@ -1,639 +1,414 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Nine Realms Codex</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: system-ui, sans-serif;
-            background: #05060a;
-            color: #f5f5f5;
-        }
-        header {
-            padding: 16px 24px;
-            background: #0b0d14;
-            border-bottom: 1px solid #222633;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 20px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-        header span {
-            font-size: 12px;
-            color: #9fa6c0;
-        }
-        main {
-            display: grid;
-            grid-template-columns: 340px 1fr;
-            min-height: calc(100vh - 60px);
-        }
-        #adminPanel {
-            padding: 16px 20px;
-            background: #080910;
-            border-right: 1px solid #222633;
-            overflow-y: auto;
-        }
-        #adminPanel h2 {
-            margin-top: 0;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: #cbd2ff;
-        }
-        #adminPanel h3 {
-            margin-top: 18px;
-            margin-bottom: 8px;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            color: #9fa6c0;
-        }
-        .field-group {
-            margin-bottom: 10px;
-        }
-        .field-group label {
-            display: block;
-            font-size: 11px;
-            margin-bottom: 3px;
-            color: #9fa6c0;
-        }
-        .field-group input,
-        .field-group select,
-        .field-group textarea {
-            width: 100%;
-            padding: 6px 8px;
-            border-radius: 4px;
-            border: 1px solid #30364a;
-            background: #05060a;
-            color: #f5f5f5;
-            font-size: 12px;
-        }
-        .field-group input[type="file"] {
-            padding: 4px;
-            background: transparent;
-            border: none;
-        }
-        button {
-            padding: 7px 10px;
-            border-radius: 4px;
-            border: none;
-            background: #3b82f6;
-            color: #f5f5f5;
-            font-size: 12px;
-            cursor: pointer;
-            margin-top: 4px;
-        }
-        button.secondary {
-            background: #1f2937;
-        }
-        button:disabled {
-            opacity: 0.5;
-            cursor: default;
-        }
-        #contentArea {
-            padding: 16px 20px;
-            overflow-y: auto;
-        }
-        #realmsList {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-        .realmPill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 10px;
-            border-radius: 999px;
-            border: 1px solid #30364a;
-            background: #080910;
-            font-size: 11px;
-            cursor: pointer;
-        }
-        .realmPill.active {
-            background: #1d283a;
-            border-color: #3b82f6;
-        }
-        .realmPill img {
-            width: 18px;
-            height: 18px;
-            border-radius: 999px;
-            object-fit: cover;
-        }
-        #realmDetail {
-            border-radius: 8px;
-            border: 1px solid #222633;
-            background: #080910;
-            padding: 14px 16px;
-        }
-        #realmDetail h2 {
-            margin: 0 0 4px;
-            font-size: 16px;
-        }
-        #realmDetail p {
-            margin: 0 0 10px;
-            font-size: 12px;
-            color: #9fa6c0;
-        }
-        .sectionRow {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .sectionCard {
-            border-radius: 6px;
-            border: 1px solid #222633;
-            background: #05060a;
-            padding: 8px 10px;
-            font-size: 12px;
-        }
-        .sectionCard h3 {
-            margin: 0 0 6px;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: #cbd2ff;
-        }
-        .itemList {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            max-height: 180px;
-            overflow-y: auto;
-        }
-        .itemCard {
-            border-radius: 4px;
-            border: 1px solid #222633;
-            padding: 6px 7px;
-            display: flex;
-            gap: 6px;
-            align-items: flex-start;
-        }
-        .itemCard img {
-            width: 40px;
-            height: 40px;
-            border-radius: 4px;
-            object-fit: cover;
-        }
-        .itemCard div {
-            font-size: 11px;
-        }
-        .itemCard div strong {
-            display: block;
-            margin-bottom: 2px;
-        }
-        .uploadRow {
-            margin-top: 6px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .uploadRow input[type="file"] {
-            font-size: 11px;
-        }
-        .small-note {
-            font-size: 10px;
-            color: #6b7280;
-            margin-top: 4px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nine Realms Codex – Fans</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        background: radial-gradient(circle at top, #1b1f3b 0, #05060a 45%, #000000 100%);
+        color: #f5f5f5;
+    }
+    header {
+        text-align: center;
+        padding: 2rem 1rem;
+        background: linear-gradient(135deg, #1b1f3b, #3b1b3b);
+        border-bottom: 1px solid #333;
+    }
+    header h1 {
+        margin: 0;
+        font-size: 2.2rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+    header p {
+        margin-top: 0.5rem;
+        font-size: 1rem;
+        color: #c0b3ff;
+    }
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+        padding: 1rem;
+        background: #0b0d14;
+        border-bottom: 1px solid #222;
+    }
+    .nav-btn {
+        padding: 0.6rem 1rem;
+        border-radius: 999px;
+        border: 1px solid #444;
+        background: #141726;
+        color: #f5f5f5;
+        text-decoration: none;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: background 0.2s, border-color 0.2s, transform 0.1s;
+    }
+    .nav-btn:hover {
+        background: #262b4a;
+        border-color: #7b5cff;
+        transform: translateY(-1px);
+    }
+    main {
+        max-width: 900px;
+        margin: 1.5rem auto;
+        padding: 1.5rem;
+        background: #0b0d14;
+        border-radius: 12px;
+        border: 1px solid #222;
+    }
+    h2 {
+        margin-top: 0;
+        font-size: 1.4rem;
+        color: #c0b3ff;
+    }
+    .section {
+        display: none;
+        animation: fadeIn 0.4s ease;
+    }
+    .section.active {
+        display: block;
+    }
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(10px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+    .item {
+        position: relative;
+        padding: 1rem;
+        border: 1px solid #222;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        background: #141726;
+        overflow: hidden;
+    }
+    .item::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 10px;
+        border: 1px solid rgba(123, 92, 255, 0.25);
+        box-shadow: 0 0 18px rgba(123, 92, 255, 0.25);
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+    }
+    .item:hover::before {
+        opacity: 1;
+    }
+    .item-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.4rem;
+    }
+    img {
+        width: 100%;
+        border-radius: 10px;
+        margin-top: 0.5rem;
+    }
+    .review-box {
+        margin-top: 1.5rem;
+        padding: 1rem;
+        background: #141726;
+        border-radius: 10px;
+        border: 1px solid #333;
+    }
+    textarea {
+        width: 100%;
+        padding: 0.6rem;
+        background: #05060a;
+        color: #f5f5f5;
+        border: 1px solid #333;
+        border-radius: 8px;
+        resize: vertical;
+    }
+    button {
+        margin-top: 0.6rem;
+        padding: 0.6rem 1rem;
+        border-radius: 999px;
+        border: 1px solid #555;
+        background: #1f2440;
+        color: #f5f5f5;
+        cursor: pointer;
+        transition: background 0.2s, border-color 0.2s;
+    }
+    button:hover {
+        background: #343b6b;
+        border-color: #7b5cff;
+    }
+    .amazon-btn {
+        display: block;
+        text-align: center;
+        margin: 1.5rem auto;
+        padding: 0.8rem 1.2rem;
+        background: #ff9900;
+        color: #000;
+        font-weight: bold;
+        border-radius: 999px;
+        text-decoration: none;
+        width: 220px;
+        animation: glowPulse 3s infinite;
+    }
+    @keyframes glowPulse {
+        0% { box-shadow: 0 0 10px rgba(255,153,0,0.4); }
+        50% { box-shadow: 0 0 22px rgba(255,153,0,0.8); }
+        100% { box-shadow: 0 0 10px rgba(255,153,0,0.4); }
+    }
+    footer {
+        text-align: center;
+        padding: 1rem;
+        font-size: 0.8rem;
+        color: #888;
+        border-top: 1px solid #222;
+        background: #05060a;
+    }
+    #audio-toggle {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        z-index: 999;
+        font-size: 0.8rem;
+    }
+</style>
 </head>
+
 <body>
+
 <header>
-    <div>
-        <h1>Nine Realms Codex</h1>
-        <span>Cloudinary integrated • dqsvwwku4 • Realms_uploads • Book folders</span>
-    </div>
+    <h1>Nine Realms Codex</h1>
+    <p>Explore the Realms • Discover the Lore • Meet the Characters</p>
 </header>
 
+<nav>
+    <button class="nav-btn" data-tab="realms">Realms</button>
+    <button class="nav-btn" data-tab="characters">Characters</button>
+    <button class="nav-btn" data-tab="maps">Maps</button>
+    <button class="nav-btn" data-tab="lore">Lore</button>
+    <button class="nav-btn" data-tab="teasers">Teasers</button>
+    <button class="nav-btn" data-tab="books">Books</button>
+    <button class="nav-btn" data-tab="reviews">Reviews</button>
+    <button class="nav-btn" data-tab="fanclub">Fan Club</button>
+</nav>
+
 <main>
-    <!-- ADMIN PANEL -->
-    <aside id="adminPanel">
-        <h2>Admin Panel</h2>
 
-        <h3>Add Realm</h3>
-        <div class="field-group">
-            <label>Realm Name</label>
-            <input id="realmName" placeholder="Aetherion">
-        </div>
-        <div class="field-group">
-            <label>Book Title (with number)</label>
-            <input id="bookTitle" placeholder="Book 1 – The Realm of Vearth">
-        </div>
-        <div class="field-group">
-            <label>Realm Icon (image file)</label>
-            <input id="realmIcon" type="file" accept="image/*">
-        </div>
-        <button onclick="createRealm()">Add Realm</button>
-        <p class="small-note">Book number is extracted from the title (e.g. “Book 1 – …” → folder <code>/book1/</code>).</p>
+    <!-- REALMS -->
+    <section id="realms" class="section active">
+        <h2>Realms</h2>
+        <div id="realm-list"></div>
+    </section>
 
-        <h3>Upload to Selected Realm</h3>
-        <div class="field-group">
-            <label>Selected Realm</label>
-            <select id="selectedRealmSelect"></select>
-        </div>
+    <!-- CHARACTERS -->
+    <section id="characters" class="section">
+        <h2>Characters</h2>
+        <div id="char-list"></div>
+    </section>
 
-        <div class="field-group">
-            <label>Map Image</label>
-            <input id="mapImageInput" type="file" accept="image/*">
-            <input id="mapTitleInput" placeholder="Map title (optional)">
-            <button onclick="uploadMapToRealm()">Upload Map</button>
-        </div>
+    <!-- MAPS -->
+    <section id="maps" class="section">
+        <h2>Maps</h2>
+        <div id="map-list"></div>
+    </section>
 
-        <div class="field-group">
-            <label>Character Image</label>
-            <input id="characterImageInput" type="file" accept="image/*">
-            <input id="characterNameInput" placeholder="Character name">
-            <textarea id="characterDescInput" placeholder="Short description" rows="2"></textarea>
-            <button onclick="uploadCharacterToRealm()">Upload Character</button>
-        </div>
+    <!-- LORE -->
+    <section id="lore" class="section">
+        <h2>Lore</h2>
+        <div id="lore-list"></div>
+    </section>
 
-        <div class="field-group">
-            <label>Lore Image</label>
-            <input id="loreImageInput" type="file" accept="image/*">
-            <input id="loreTitleInput" placeholder="Lore title">
-            <textarea id="loreTextInput" placeholder="Lore text" rows="3"></textarea>
-            <button onclick="uploadLoreToRealm()">Upload Lore</button>
-        </div>
-    </aside>
+    <!-- TEASERS -->
+    <section id="teasers" class="section">
+        <h2>Teasers</h2>
+        <div id="teaser-list"></div>
 
-    <!-- CONTENT AREA -->
-    <section id="contentArea">
-        <div id="realmsList"></div>
-
-        <div id="realmDetail">
-            <h2>No realm selected</h2>
-            <p>Add a realm in the admin panel, then select it from the list above.</p>
+        <!-- Trailer embed -->
+        <div class="item">
+            <div class="item-title">Official Trailer</div>
+            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;">
+                <iframe 
+                    src="https://www.youtube.com/embed/VIDEO_ID" 
+                    title="Nine Realms Trailer"
+                    style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:10px;"
+                    allowfullscreen>
+                </iframe>
+            </div>
         </div>
     </section>
+
+    <!-- BOOKS -->
+    <section id="books" class="section">
+        <h2>Books</h2>
+        <div id="book-list"></div>
+
+        <a class="amazon-btn" href="https://www.amazon.com/dp/B0H5CFFZNC" target="_blank">
+            Buy on Amazon
+        </a>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="reviews" class="section">
+        <h2>Fan Reviews</h2>
+
+        <div id="review-list"></div>
+
+        <div class="review-box">
+            <h3>Leave a Review</h3>
+            <textarea id="review-text" placeholder="Write your review..."></textarea>
+            <button id="submit-review">Submit Review</button>
+        </div>
+    </section>
+
+    <!-- FAN CLUB -->
+    <section id="fanclub" class="section">
+        <h2>Join the Nine Realms Fan Club</h2>
+
+        <div class="item">
+            <div class="item-title">Become a Realmwalker</div>
+            <div>
+                Get early teasers, secret lore, and special announcements from the Nine Realms.
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-title">Stay Connected</div>
+            <div>
+                Follow the Amazon page for updates, new releases, and special promotions.
+            </div>
+        </div>
+    </section>
+
 </main>
 
+<footer>
+    Nine Realms Codex © Fans Portal
+</footer>
+
+<audio id="ambient-audio" src="YOUR_AUDIO_URL.mp3" loop></audio>
+<button id="audio-toggle">🔊 Ambient On/Off</button>
+
 <script>
-    // --- Cloudinary Upload Engine ---
-    async function uploadToCloudinary(file, bookNumber) {
-        const cloudName = "dqsvwwku4";
-        const uploadPreset = "Realms_uploads";
+    // Navigation tabs
+    const navButtons = document.querySelectorAll(".nav-btn");
+    const sections = document.querySelectorAll(".section");
 
-        const folderName = `book${bookNumber}`;
-
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("upload_preset", uploadPreset);
-        formData.append("folder", folderName);
-
-        const response = await fetch(
-            `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-            { method: "POST", body: formData }
-        );
-
-        const data = await response.json();
-        return data.secure_url;
-    }
-
-    // --- Realm Storage ---
-    let realms = JSON.parse(localStorage.getItem("realms") || "[]");
-    let activeRealmId = null;
-
-    function saveRealms() {
-        localStorage.setItem("realms", JSON.stringify(realms));
-    }
-
-    // --- Add Realm (full book title field) ---
-    function extractBookNumber(bookTitle) {
-        const match = bookTitle.match(/\d+/);
-        return match ? match[0] : 1;
-    }
-
-    function addRealm(name, bookTitle, iconUrl) {
-        const bookNumber = extractBookNumber(bookTitle);
-
-        realms.push({
-            id: Date.now(),
-            name,
-            bookTitle,
-            bookNumber,
-            iconUrl,
-            maps: [],
-            characters: [],
-            lore: []
+    navButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const target = btn.dataset.tab;
+            sections.forEach(sec => {
+                sec.classList.toggle("active", sec.id === target);
+            });
         });
+    });
 
-        saveRealms();
-        renderRealms();
-        populateRealmSelect();
-    }
+    // Ambient audio
+    const ambient = document.getElementById("ambient-audio");
+    const audioToggle = document.getElementById("audio-toggle");
 
-    // --- Upload Realm Icon ---
-    async function handleRealmIconUpload(input, bookTitle) {
-        const file = input.files[0];
-        if (!file) return null;
-        const bookNumber = extractBookNumber(bookTitle);
-        return await uploadToCloudinary(file, bookNumber);
-    }
-
-    // --- Upload generic image for realm ---
-    async function uploadRealmImage(input, realm) {
-        const file = input.files[0];
-        if (!file) return null;
-        const url = await uploadToCloudinary(file, realm.bookNumber);
-        return url;
-    }
-
-    // --- Admin: Create Realm ---
-    async function createRealm() {
-        const name = document.getElementById("realmName").value.trim();
-        const bookTitle = document.getElementById("bookTitle").value.trim();
-        const iconInput = document.getElementById("realmIcon");
-
-        if (!name || !bookTitle || !iconInput.files[0]) {
-            alert("Please fill realm name, book title, and choose an icon image.");
-            return;
+    audioToggle.addEventListener("click", () => {
+        if (ambient.paused) {
+            ambient.play();
+            audioToggle.textContent = "🔊 Ambient On";
+        } else {
+            ambient.pause();
+            audioToggle.textContent = "🔇 Ambient Off";
         }
+    });
 
-        const iconUrl = await handleRealmIconUpload(iconInput, bookTitle);
-        if (!iconUrl) {
-            alert("Icon upload failed.");
-            return;
-        }
+    // Load admin data from localStorage
+    const realms = JSON.parse(localStorage.getItem("realms") || "[]");
+    const characters = JSON.parse(localStorage.getItem("characters") || "[]");
+    const maps = JSON.parse(localStorage.getItem("maps") || "[]");
+    const lores = JSON.parse(localStorage.getItem("lores") || "[]");
+    const teasers = JSON.parse(localStorage.getItem("teasers") || "[]");
+    const books = JSON.parse(localStorage.getItem("books") || "[]");
 
-        addRealm(name, bookTitle, iconUrl);
-
-        document.getElementById("realmName").value = "";
-        document.getElementById("bookTitle").value = "";
-        iconInput.value = "";
-    }
-
-    // --- Realm Select for uploads ---
-    function populateRealmSelect() {
-        const select = document.getElementById("selectedRealmSelect");
-        select.innerHTML = "";
-
-        if (realms.length === 0) {
-            const opt = document.createElement("option");
-            opt.value = "";
-            opt.textContent = "No realms yet";
-            select.appendChild(opt);
-            select.disabled = true;
-            return;
-        }
-
-        select.disabled = false;
-
-        realms.forEach(realm => {
-            const opt = document.createElement("option");
-            opt.value = realm.id;
-            opt.textContent = `${realm.name} (${realm.bookTitle})`;
-            select.appendChild(opt);
-        });
-
-        if (!activeRealmId && realms.length > 0) {
-            activeRealmId = realms[0].id;
-        }
-        select.value = activeRealmId;
-    }
-
-    function getSelectedRealm() {
-        const select = document.getElementById("selectedRealmSelect");
-        const id = Number(select.value);
-        return realms.find(r => r.id === id) || null;
-    }
-
-    // --- Upload Map ---
-    async function uploadMapToRealm() {
-        const realm = getSelectedRealm();
-        if (!realm) {
-            alert("Select a realm first.");
-            return;
-        }
-
-        const input = document.getElementById("mapImageInput");
-        const title = document.getElementById("mapTitleInput").value.trim();
-
-        if (!input.files[0]) {
-            alert("Choose a map image file.");
-            return;
-        }
-
-        const url = await uploadRealmImage(input, realm);
-        if (!url) {
-            alert("Map upload failed.");
-            return;
-        }
-
-        realm.maps.push({
-            url,
-            title: title || "Untitled Map"
-        });
-
-        saveRealms();
-        renderRealmDetail(realm.id);
-
-        input.value = "";
-        document.getElementById("mapTitleInput").value = "";
-    }
-
-    // --- Upload Character ---
-    async function uploadCharacterToRealm() {
-        const realm = getSelectedRealm();
-        if (!realm) {
-            alert("Select a realm first.");
-            return;
-        }
-
-        const input = document.getElementById("characterImageInput");
-        const name = document.getElementById("characterNameInput").value.trim();
-        const desc = document.getElementById("characterDescInput").value.trim();
-
-        if (!input.files[0]) {
-            alert("Choose a character image file.");
-            return;
-        }
-        if (!name) {
-            alert("Enter a character name.");
-            return;
-        }
-
-        const url = await uploadRealmImage(input, realm);
-        if (!url) {
-            alert("Character upload failed.");
-            return;
-        }
-
-        realm.characters.push({
-            url,
-            name,
-            desc: desc || ""
-        });
-
-        saveRealms();
-        renderRealmDetail(realm.id);
-
-        input.value = "";
-        document.getElementById("characterNameInput").value = "";
-        document.getElementById("characterDescInput").value = "";
-    }
-
-    // --- Upload Lore ---
-    async function uploadLoreToRealm() {
-        const realm = getSelectedRealm();
-        if (!realm) {
-            alert("Select a realm first.");
-            return;
-        }
-
-        const input = document.getElementById("loreImageInput");
-        const title = document.getElementById("loreTitleInput").value.trim();
-        const text = document.getElementById("loreTextInput").value.trim();
-
-        if (!input.files[0]) {
-            alert("Choose a lore image file.");
-            return;
-        }
-        if (!title) {
-            alert("Enter a lore title.");
-            return;
-        }
-
-        const url = await uploadRealmImage(input, realm);
-        if (!url) {
-            alert("Lore upload failed.");
-            return;
-        }
-
-        realm.lore.push({
-            url,
-            title,
-            text: text || ""
-        });
-
-        saveRealms();
-        renderRealmDetail(realm.id);
-
-        input.value = "";
-        document.getElementById("loreTitleInput").value = "";
-        document.getElementById("loreTextInput").value = "";
-    }
-
-    // --- Render Realms Pills ---
-    function renderRealms() {
-        const container = document.getElementById("realmsList");
+    // Render helper
+    function render(container, items, formatter) {
         container.innerHTML = "";
-
-        if (realms.length === 0) {
-            container.innerHTML = "<p style='font-size:12px;color:#9fa6c0;'>No realms yet. Add one in the admin panel.</p>";
-            document.getElementById("realmDetail").innerHTML =
-                "<h2>No realm selected</h2><p>Add a realm in the admin panel, then select it from the list above.</p>";
+        if (!items.length) {
+            container.innerHTML = "<p>No entries yet.</p>";
             return;
         }
-
-        realms.forEach(realm => {
-            const pill = document.createElement("div");
-            pill.className = "realmPill" + (realm.id === activeRealmId ? " active" : "");
-            pill.onclick = () => {
-                activeRealmId = realm.id;
-                populateRealmSelect();
-                renderRealms();
-                renderRealmDetail(realm.id);
-            };
-
-            const img = document.createElement("img");
-            img.src = realm.iconUrl;
-
-            const span = document.createElement("span");
-            span.textContent = realm.name;
-
-            pill.appendChild(img);
-            pill.appendChild(span);
-            container.appendChild(pill);
+        items.forEach(item => {
+            const div = document.createElement("div");
+            div.className = "item";
+            div.innerHTML = formatter(item);
+            container.appendChild(div);
         });
-
-        if (activeRealmId) {
-            renderRealmDetail(activeRealmId);
-        }
     }
 
-    // --- Render Realm Detail ---
-    function renderRealmDetail(realmId) {
-        const realm = realms.find(r => r.id === realmId);
-        const detail = document.getElementById("realmDetail");
+    // Render all sections
+    render(document.getElementById("realm-list"), realms, r => `
+        <div class="item-title">${r.name}</div>
+        <div>${r.desc || ""}</div>
+        ${r.icon ? `<img src="${r.icon}">` : ""}
+    `);
 
-        if (!realm) {
-            detail.innerHTML =
-                "<h2>No realm selected</h2><p>Add a realm in the admin panel, then select it from the list above.</p>";
-            return;
-        }
+    render(document.getElementById("char-list"), characters, c => `
+        <div class="item-title">${c.name} ${c.role ? "– " + c.role : ""}</div>
+        ${c.realm ? `<div>Realm: ${c.realm}</div>` : ""}
+        ${c.backstory ? `<div>${c.backstory}</div>` : ""}
+        ${c.img ? `<img src="${c.img}">` : ""}
+    `);
 
-        detail.innerHTML = `
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-                <img src="${realm.iconUrl}" style="width:40px;height:40px;border-radius:999px;object-fit:cover;">
-                <div>
-                    <h2 style="margin:0;">${realm.name}</h2>
-                    <p style="margin:0;font-size:12px;color:#9fa6c0;">${realm.bookTitle} • Folder: /book${realm.bookNumber}/</p>
-                </div>
-            </div>
-            <div class="sectionRow">
-                <div class="sectionCard">
-                    <h3>Maps</h3>
-                    <div class="itemList">
-                        ${realm.maps.map(m => `
-                            <div class="itemCard">
-                                <img src="${m.url}">
-                                <div>
-                                    <strong>${m.title}</strong>
-                                    <span>Book ${realm.bookNumber}</span>
-                                </div>
-                            </div>
-                        `).join("") || "<p style='font-size:11px;color:#6b7280;'>No maps yet.</p>"}
-                    </div>
-                </div>
-                <div class="sectionCard">
-                    <h3>Characters</h3>
-                    <div class="itemList">
-                        ${realm.characters.map(c => `
-                            <div class="itemCard">
-                                <img src="${c.url}">
-                                <div>
-                                    <strong>${c.name}</strong>
-                                    <span>${c.desc || ""}</span>
-                                </div>
-                            </div>
-                        `).join("") || "<p style='font-size:11px;color:#6b7280;'>No characters yet.</p>"}
-                    </div>
-                </div>
-                <div class="sectionCard">
-                    <h3>Lore</h3>
-                    <div class="itemList">
-                        ${realm.lore.map(l => `
-                            <div class="itemCard">
-                                <img src="${l.url}">
-                                <div>
-                                    <strong>${l.title}</strong>
-                                    <span>${l.text || ""}</span>
-                                </div>
-                            </div>
-                        `).join("") || "<p style='font-size:11px;color:#6b7280;'>No lore yet.</p>"}
-                    </div>
-                </div>
-            </div>
-        `;
+    render(document.getElementById("map-list"), maps, m => `
+        <div class="item-title">${m.name} ${m.type ? "(" + m.type + ")" : ""}</div>
+        ${m.realm ? `<div>Realm: ${m.realm}</div>` : ""}
+        ${m.url ? `<img src="${m.url}">` : ""}
+    `);
+
+    render(document.getElementById("lore-list"), lores, l => `
+        <div class="item-title">${l.title}</div>
+        ${l.realm ? `<div>Realm: ${l.realm}</div>` : ""}
+        ${l.book ? `<div>Book: ${l.book}</div>` : ""}
+        ${l.content ? `<div>${l.content}</div>` : ""}
+    `);
+
+    render(document.getElementById("teaser-list"), teasers, t => `
+        <div class="item-title">${t.title}</div>
+        ${t.target ? `<div>Target: ${t.target}</div>` : ""}
+        ${t.text ? `<div>${t.text}</div>` : ""}
+        ${t.img ? `<img src="${t.img}">` : ""}
+    `);
+
+    render(document.getElementById("book-list"), books, b => `
+        <div class="item-title">${b.fullTitle}</div>
+        ${b.number ? `<div>Book number: ${b.number}</div>` : ""}
+        ${b.desc ? `<div>${b.desc}</div>` : ""}
+    `);
+
+    // Reviews
+    const reviewList = document.getElementById("review-list");
+    const reviewText = document.getElementById("review-text");
+    const submitReview = document.getElementById("submit-review");
+
+    const reviews = JSON.parse(localStorage.getItem("reviews") || "[]");
+
+    function renderReviews() {
+        render(reviewList, reviews, r => `
+            <div class="item-title">Fan Review</div>
+            <div>${r}</div>
+        `);
     }
 
-    // --- Init ---
-    window.addEventListener("load", () => {
-        if (realms.length > 0) {
-            activeRealmId = realms[0].id;
-        }
-        renderRealms();
-        populateRealmSelect();
+    renderReviews();
+
+    submitReview.addEventListener("click", () => {
+        const text = reviewText.value.trim();
+        if (!text) return;
+
+        reviews.push(text);
+        localStorage.setItem("reviews", JSON.stringify(reviews));
+
+        reviewText.value = "";
+        renderReviews();
     });
 </script>
+
 </body>
 </html>
