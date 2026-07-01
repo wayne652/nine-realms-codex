@@ -1,0 +1,123 @@
+/* --------------------------------------------------
+   GLOBAL PAGE STYLE — PURPLE FANTASY THEME
+-------------------------------------------------- */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: url("https://res.cloudinary.com/dark-fantasy-bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Cinzel', serif;
+    color: #e6d9ff;
+}
+
+/* --------------------------------------------------
+   HEADER
+-------------------------------------------------- */
+
+header {
+    background: linear-gradient(90deg, #3a0066, #5b0099);
+    padding: 20px;
+    text-align: center;
+    border-bottom: 3px solid #9b4dff;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+    text-shadow: 0 0 10px #c28cff;
+}
+
+/* --------------------------------------------------
+   NAVIGATION TABS
+-------------------------------------------------- */
+
+nav {
+    display: flex;
+    justify-content: center;
+    background: rgba(30, 0, 60, 0.8);
+    padding: 10px;
+    border-bottom: 2px solid #7a2cff;
+}
+
+.tab-btn {
+    background: #5b0099;
+    border: 2px solid #9b4dff;
+    color: #e6d9ff;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.tab-btn:hover {
+    background: #7a2cff;
+    box-shadow: 0 0 10px #c28cff;
+}
+
+.tab-btn.active {
+    background: #9b4dff;
+    color: #fff;
+    box-shadow: 0 0 15px #d8b4ff;
+}
+
+/* --------------------------------------------------
+   TAB SECTIONS
+-------------------------------------------------- */
+
+.tab-section {
+    display: none;
+    padding: 20px;
+    background: rgba(20, 0, 40, 0.85);
+    margin: 20px auto;
+    width: 90%;
+    border: 2px solid #7a2cff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #3a0066;
+}
+
+.tab-section h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 8px #c28cff;
+}
+
+/* --------------------------------------------------
+   INPUTS & TEXTAREAS
+-------------------------------------------------- */
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-size: 18px;
+    color: #e6d9ff;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    background: rgba(50, 0, 90, 0.7);
+    border: 2px solid #9b4dff;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 16px;
+}
+
+textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+/* --------------------------------------------------
+   CIRCULAR PREVIEW IMAGES
+-------------------------------------------------- */
+
+.preview-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid

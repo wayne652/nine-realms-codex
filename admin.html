@@ -1,58 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>ADMIN CODEX</title>
-  <link rel="stylesheet" href="styles/codex.css">
+    <meta charset="UTF-8">
+    <title>Nine Realms Admin Codex</title>
+    <link rel="stylesheet" href="admin.css">
 </head>
-<body class="codex-body admin-body">
-  <header class="codex-header admin-header">
-    <h1>ADMIN CODEX</h1>
-    <p>Worldbuilding Control Panel – Nine Realms</p>
-    <nav class="codex-nav">
-      <button data-panel="realms">Realms</button>
-      <button data-panel="characters">Characters</button>
-      <button data-panel="maps">Maps</button>
-      <button data-panel="lore">Lore</button>
-      <button data-panel="teasers">Teasers</button>
-      <button data-panel="books">Books</button>
-      <button data-panel="reviews">Reviews</button>
-      <button data-panel="fans">Fan Club</button>
-    </nav>
-  </header>
+<body>
 
-  <main id="admin-main">
-    <section id="panel-realms" class="admin-panel active">
-      <h2>Manage Realms</h2>
-      <label>Realm ID (short, no spaces)</label>
-      <input id="realm-id" placeholder="vearth">
+<header>
+    <h1>Nine Realms Admin Codex</h1>
+</header>
 
-      <label>Realm name</label>
-      <input id="realm-name" placeholder="Vearth">
+<nav>
+    <button class="tab-btn" data-tab="realms">Realms</button>
+    <button class="tab-btn" data-tab="characters">Characters</button>
+    <button class="tab-btn" data-tab="maps">Maps</button>
+    <button class="tab-btn" data-tab="lore">Lore</button>
+    <button class="tab-btn" data-tab="teasers">Teasers</button>
+    <button class="tab-btn" data-tab="books">Books</button>
+    <button class="tab-btn" data-tab="reviews">Reviews</button>
+    <button class="tab-btn" data-tab="fanclub">Fan Club</button>
+</nav>
 
-      <label>Realm description</label>
-      <textarea id="realm-description" placeholder="Describe the realm..."></textarea>
+<main>
+    <!-- REALMS TAB -->
+    <section id="realms" class="tab-section">
+        <h2>Realms</h2>
 
-      <label>Realm icon URL (Cloudinary)</label>
-      <input id="realm-icon" placeholder="https://res.cloudinary.com/.../icon.png">
+        <label>Realm Name</label>
+        <input id="realmName">
 
-      <label>Realm background URL (Cloudinary)</label>
-      <input id="realm-background" placeholder="https://res.cloudinary.com/.../background.png">
+        <label>Realm Description</label>
+        <textarea id="realmDesc"></textarea>
 
-      <button id="build-realm-json">Build Realm JSON</button>
+        <label>Realm Icon (Cloudinary URL)</label>
+        <input id="realmIcon">
+        <img id="realmIconPreview" class="preview-circle">
 
-      <h3>Copy this into codex.json → "realms" array</h3>
-      <textarea id="realm-json-output" class="json-output" readonly></textarea>
+        <label>Realm Background (Cloudinary URL)</label>
+        <input id="realmBg">
+        <img id="realmBgPreview" class="preview-circle">
+
+        <button id="buildRealmJSON">Build Realm JSON</button>
+        <textarea id="realmJSONOutput" class="json-output"></textarea>
     </section>
 
-    <!-- You can duplicate this pattern for characters, maps, lore, etc. later -->
+    <!-- CHARACTERS TAB -->
+    <section id="characters" class="tab-section">
+        <h2>Characters</h2>
 
-  </main>
+        <label>Character Name</label>
+        <input id="charName">
 
-  <footer class="codex-footer">
-    <span>Admin Codex © Nine Realms</span>
-  </footer>
+        <label>Character Bio</label>
+        <textarea id="charBio"></textarea>
 
-  <script src="scripts/admin.js"></script>
+        <label>Character Portrait (Cloudinary URL)</label>
+        <input id="charImg">
+        <img id="charImgPreview" class="preview-circle">
+
+        <button id="buildCharJSON">Build Character JSON</button>
+        <textarea id="charJSONOutput" class="json-output"></textarea>
+    </section>
+
+    <!-- MAPS TAB -->
+    <section id="maps" class="tab-section">
+        <h2>Maps</h2>
+
+        <label>Map Name</label>
+        <input id="mapName">
+
+        <label>Map Description</label>
+        <textarea id="mapDesc"></textarea>
+
+        <label>Map Image (Cloudinary URL)</label>
+        <input id="mapImg">
+        <img id="mapImgPreview" class="preview-circle">
+
+        <button id="buildMapJSON">Build Map JSON</button>
+        <textarea id="mapJSONOutput" class="json-output"></textarea>
+    </section>
+
+    <!-- LORE TAB -->
+    <section id="lore" class="tab-section">
+        <h2>Lore</h2>
+
+        <label>Lore Title</label>
+        <input id="loreTitle">
+
+        <label>Lore Content</label>
+        <textarea id="loreContent"></textarea>
+
+        <button id="buildLoreJSON">Build Lore JSON</button>
+        <textarea id="loreJSONOutput" class="json-output"></textarea>
+    </section>
+
+    <!-- TEASERS TAB -->
+    <section id="teasers" class="tab-section">
+        <h2>Teasers</h2>
+
+        <label>Teaser Title</label>
+        <input id="teaserTitle">
+
+        <label>Teaser Text</label>
+        <textarea id="teaserText"></textarea>
+
+        <label>Teaser Image (Cloudinary URL)</label>
+        <input id="teaserImg">
+        <img id="teaserImgPreview" class="preview-circle">
+
+        <button id="buildTeaserJSON">Build Teaser JSON</button>
+        <textarea id="teaserJSONOutput" class="json-output"></textarea>
+    </section>
+
+    <!-- BOOKS TAB -->
+    <section id="books" class="tab-section">
+        <h2>Books</h2>
+
+        <label>Book Title</label>
+        <input id="bookTitle">
+
+        <label>Book Summary</label>
+        <textarea id="bookSummary"></textarea>
+
+        <label>Book Cover (Cloudinary URL)</label>
+        <input id="bookCover">
+        <img id="bookCoverPreview" class="preview-circle">
+
+        <button id="buildBookJSON">Build Book JSON</button>
+        <textarea id="bookJSONOutput" class="json-output"></textarea>
+    </section>
+
+    <!-- REVIEWS TAB -->
+    <section id="reviews" class="tab-section">
+        <h2>Reviews</h2>
+
+        <label>Reviewer Name</label>
+        <input id="reviewerName">
+
+        <label>Review Text</label>
+        <textarea id="reviewText"></textarea>
+
+        <label>Reviewer Avatar (Cloudinary URL)</label>
+        <input id="reviewAvatar">
+        <img id="reviewAvatarPreview" class="preview-circle">
+
+        <button id="buildReviewJSON">Build Review JSON</button>
+        <textarea id="reviewJSONOutput" class="json-output"></textarea>
+    </section>
+
+    <!-- FAN CLUB TAB -->
+    <section id="fanclub" class="tab-section">
+        <h2>Fan Club</h2>
+
+        <label>Fan Name</label>
+        <input id="fanName">
+
+        <label>Fan Message</label>
+        <textarea id="fanMessage"></textarea>
+
+        <label>Fan Avatar (Cloudinary URL)</label>
+        <input id="fanAvatar">
+        <img id="fanAvatarPreview" class="preview-circle">
+
+        <button id="buildFanJSON">Build Fan JSON</button>
+        <textarea id="fanJSONOutput" class="json-output"></textarea>
+    </section>
+
+</main>
+
+<script src="admin.js"></script>
 </body>
 </html>
